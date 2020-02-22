@@ -1,0 +1,16 @@
+{
+  "name": "blog-website-react-redux-nodejs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kayahan BASKESER",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2",
+    "pg": "^7.18.2",
+    "sequelize": "^5.21.5"
+  }
+}
