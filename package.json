@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Kayahan BASKESER",
-
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --watch-poll",
@@ -45,6 +44,7 @@
     "antd": "^3.26.11",
     "babel-plugin-import": "^1.13.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.2",
     "pg": "^7.18.2",
     "react": "^16.12.0",
