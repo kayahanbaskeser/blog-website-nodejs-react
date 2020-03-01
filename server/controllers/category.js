@@ -8,7 +8,7 @@ exports.add = (req, res) => {
     name: req.body.name
   })
     .then(() => {
-      res.status(202).send({ message: "OK" });
+      res.status(200).send({ message: "OK" });
     })
     .catch(() => {
       res.status(400).send({ message: "Something went wrong." });

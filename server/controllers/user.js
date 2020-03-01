@@ -1,11 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-
-const secretKey = "FuckY0u";
-
-exports.addUser = async (req, res, next) => {
-  res.send(200);
-};
+const secretKey = require("../constant");
 
 exports.loginUser = (req, res) => {
   if (!req.body.name || !req.body.password) {
@@ -23,7 +18,7 @@ exports.loginUser = (req, res) => {
       const token = jwt.sign({ name: user.name }, secretKey, {
         expiresIn: "2h"
       });
-      return res.status(200).send({ message: "sa", token: token });
+      return res.status(200).send({ token });
     });
   }
 };

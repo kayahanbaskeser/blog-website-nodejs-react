@@ -1,67 +1,76 @@
 const Post = require("../models/post");
 
 exports.add = (req, res) => {
-  console.log(req.body)
-  if (!req.body.title || !req.body.description) {
-    return res.status(400).send({ message: "Name or Description can not be empty" });
+  if (!req.body.title || !req.body.description || !req.body.category) {
+    return res
+      .status(400)
+      .send({ message: "Name or Description can not be empty" });
   }
   Post.create({
     title: req.body.title,
     description: req.body.description,
-    posts_id_category_fkey: 2
+    categoryId: req.body.category
   })
     .then(() => {
-      res.send(200);
+      res.status(200).send({ message: "OK" });
     })
     .catch(err => {
-      console.log(err);
-      res.send(400);
+      res.status(400).send({ message: "Something went wrong." });
     });
 };
 
 exports.delete = (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ message: "Post Id can not be empty" });
+  }
   Post.findByPk(req.body.id).then(post => {
     if (post) {
       return post.destroy().then(() => {
-        res.send(200);
+        res.status(200).send({ message: "OK" });
       });
     }
-    res.send(400);
+    res.status(400).send({ message: "Something went wrong." });
   });
 };
 
 exports.get = (req, res) => {
+  if (!req.body.id) {
+    return res.status(400).send({ message: "Post Id can not be empty" });
+  }
   Post.findByPk(req.body.id)
     .then(post => {
       if (post) {
         res.json(post);
       }
-      res.send(400);
+      res.status(400).send({ message: "Something went wrong." });
     })
-    .catch(err => {
-      res.send(400);
+    .catch(() => {
+      res.status(400).send({ message: "Something went wrong." });
     });
 };
 
 exports.getAll = (req, res) => {
   Post.findAll(
-    // req.body.category && { where: { categoryId: req.body.category } }
+    req.body.category && { where: { categoryId: req.body.category } }
   ).then(post => {
     res.json(post);
   });
 };
 
 exports.update = (req, res) => {
+  if (!req.body.id || !req.body.title || !req.body.description) {
+    return res.status(400).send({ message: "Empty Fields :(" });
+  }
   Post.findByPk(req.body.id).then(post => {
     post.title = req.body.title;
     post.description = req.body.description;
     post
       .save()
       .then(() => {
-        res.send(200);
+        res.status(200).send({ message: "OK" });
       })
       .catch(() => {
-        res.send(400);
+        res.status(400).send({ message: "Something went wrong." });
       });
   });
 };

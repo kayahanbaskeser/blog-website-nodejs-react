@@ -1,9 +1,16 @@
-const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const secretKey = require("../constant");
 
-exports.isAuth = (req, res, next) => {
-  console.log(req.headers.authorization)
-  const token = req.headers.authorization
-  console.log(decodedToken = jwt.verify(token, 'secretaq1'))
-  next();
+const isAuth = (req, res, next) => {
+  try {
+    const decodedToken = jwt.verify(req.headers.authorization, secretKey);
+    req.userData = decodedToken;
+    next();
+  } catch (error) {
+    return res.status(400).send({
+      message: "Siktir git."
+    });
+  }
 };
+
+module.exports = { isAuth };
