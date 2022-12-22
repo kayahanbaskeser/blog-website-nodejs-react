@@ -44,7 +44,7 @@
     "antd": "3.26.11",
     "babel-plugin-import": "1.13.0",
     "express": "4.17.1",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "nodemon": "2.0.2",
     "pg": "7.18.2",
     "react": "16.12.0",
